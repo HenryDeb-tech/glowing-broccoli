@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My first site</title>
+  <title>RoomPulse</title>
+  <meta name="description" content="RoomPulse: live polls and quizzes for internal meetings. A training exercise with made-up data.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <main>
-    <p class="eyebrow">It's alive</p>
-    <h1>Hello, friends.</h1>
-    <p>If you can read this on a real web address, your site is deployed. Now open Claude Code and ask it to turn this page into something of your own.</p>
+<body data-view="home">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="#">RoomPulse</a>
+      <span id="orgbadge" class="orgbadge"></span>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#host" data-nav="host">Host</a></li>
+          <li><a href="#join" data-nav="join">Join</a></li>
+          <li><a href="#screen" data-nav="screen">Big screen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1">
+    <noscript><p>RoomPulse needs JavaScript turned on to work.</p></noscript>
   </main>
 
   <footer>

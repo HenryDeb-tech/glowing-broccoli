@@ -1,8 +1,19 @@
+/* Theme tokens. The --brand and --accent values are replaced at runtime
+   from the client organisation's record (see applyTheme in script.js). */
 :root {
   --ink: #1a1a2e;
   --paper: #fafaf7;
+  --surface: #ffffff;
+  --muted: #55586a;
+  --line: #d9dae3;
+  --danger: #b3261e;
+  --focus: #1a56db;
+
+  --brand: #1a1a2e;
+  --brand-ink: #ffffff;
+  --brand-text: #1a1a2e;
   --accent: #5b4bdb;
-  --muted: #5f6270;
+  --accent-ink: #ffffff;
 }
 
 * { box-sizing: border-box; }
@@ -18,19 +29,88 @@ body {
   background: var(--paper);
 }
 
+h1, h2, h3 {
+  font-family: Montserrat, system-ui, sans-serif;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); }
+h2 { font-size: 1.35rem; margin-top: 2rem; }
+h3 { font-size: 1.1rem; }
+
+a { color: var(--brand-text); }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #fff;
+}
+h1:focus, main:focus { outline: none; box-shadow: none; }
+
+/* Top bar */
+.topbar {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+.topbar-inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+.wordmark {
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: inherit;
+  text-decoration: none;
+}
+.orgbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.orgbadge:empty { display: none; }
+.topbar nav { margin-left: auto; }
+.topbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.25rem;
+}
+.topbar nav a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+.topbar nav a:hover { text-decoration: underline; }
+.topbar nav a[aria-current="page"] {
+  background: var(--brand-ink);
+  color: var(--brand);
+}
+
 main {
   flex: 1;
   width: 100%;
-  max-width: 40rem;
+  max-width: 48rem;
   margin: 0 auto;
-  padding: 15vh 1.5rem 3rem;
+  padding: 2.5rem 1rem 3rem;
 }
 
-h1 {
-  margin: 0 0 1rem;
-  font-family: Montserrat, system-ui, sans-serif;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  line-height: 1.1;
+footer {
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--muted);
 }
 
 .eyebrow {
@@ -39,12 +119,175 @@ h1 {
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--muted);
+}
+.lead { font-size: 1.1rem; color: var(--muted); margin-top: 0; }
+
+.note {
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
 }
 
-footer {
-  padding: 1.5rem;
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 0 0 1rem;
+}
+.cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 40rem) {
+  .cards.three { grid-template-columns: repeat(3, 1fr); }
+}
+.cards .card { margin: 0; }
+.card h2, .card h3 { margin-top: 0; }
+.meta { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0 0; }
+
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
   font-size: 0.8rem;
-  text-align: center;
-  color: var(--muted);
+  font-weight: 600;
+  background: var(--line);
+  color: var(--ink);
+}
+.badge.open { background: #1f7a3a; color: #fff; }
+.badge.closed { background: #444; color: #fff; }
+
+.code {
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* Buttons and forms */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: 2px solid var(--brand);
+  background: var(--brand);
+  color: var(--brand-ink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn.secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn.danger {
+  background: var(--surface);
+  color: var(--danger);
+  border-color: var(--line);
+}
+.btn.big { width: 100%; min-height: 56px; font-size: 1.1rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+label { font-weight: 600; display: block; margin: 1rem 0 0.35rem; }
+input[type="text"], textarea, select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+  color: var(--ink);
+}
+input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--focus); }
+.inline-row { display: flex; gap: 0.5rem; align-items: center; }
+.inline-row input[type="text"] { flex: 1; }
+.check { display: flex; gap: 0.5rem; align-items: center; font-weight: 400; margin: 0.25rem 0; white-space: nowrap; }
+.check input { width: 1.25rem; height: 1.25rem; }
+fieldset { border: 0; padding: 0; margin: 1rem 0 0; }
+legend { font-weight: 600; padding: 0; }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0 0; }
+.error { color: var(--danger); font-weight: 600; }
+.error:empty { display: none; }
+
+/* Only show the "correct answer" ticks when building a quiz */
+form[data-type="poll"] .quiz-only { display: none; }
+
+/* Attendee phone view */
+.choices { display: grid; gap: 0.75rem; margin: 1rem 0 1.5rem; }
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 56px;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.choice input { width: 1.4rem; height: 1.4rem; flex: none; accent-color: var(--brand); }
+.choice:has(input:checked) { border-color: var(--brand); box-shadow: inset 0 0 0 2px var(--brand); }
+.status-big { font-size: 1.25rem; font-weight: 600; }
+.result-mine { font-weight: 600; }
+
+/* Results bars (host and big screen) */
+.total { font-weight: 600; margin: 0.75rem 0 0.5rem; }
+.bars { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+.bar-label { display: flex; justify-content: space-between; gap: 1rem; font-weight: 600; }
+.bar-num { white-space: nowrap; }
+.bar-num small { font-weight: 400; }
+.bar-track { height: 14px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--brand); border-radius: 999px; transition: width 0.4s ease; }
+.tick { display: inline-block; margin-left: 0.5rem; padding: 0 0.5rem; border-radius: 999px; background: #1f7a3a; color: #fff; font-size: 0.85em; }
+
+/* Big-screen view: projector-friendly, brand background */
+body[data-view="screen"] { background: var(--brand); color: var(--brand-ink); }
+body[data-view="screen"] .topbar { display: none; }
+.screen-join > span { display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+body[data-view="screen"] main { max-width: 90rem; padding: 2rem 2rem 1rem; }
+body[data-view="screen"] footer { color: inherit; opacity: 0.85; }
+body[data-view="screen"] a { color: inherit; }
+.screen-join {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  font-weight: 600;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+.screen-join .code { font-size: 1.6em; }
+.screen-question { font-size: clamp(2.2rem, 5vw, 4.5rem); margin-bottom: 1.5rem; }
+.screen .total { font-size: clamp(1.2rem, 2.2vw, 2rem); }
+.screen .bars { gap: 1.5rem; }
+.screen .bar-label { font-size: clamp(1.4rem, 3vw, 2.8rem); }
+.screen .bar-track { height: clamp(24px, 3.5vw, 48px); background: color-mix(in srgb, var(--brand-ink) 20%, transparent); }
+.screen .bar-fill { background: var(--accent); }
+.screen-waiting { font-size: clamp(1.8rem, 4vw, 3.5rem); }
+.screen-waiting .code { display: block; font-size: 2.2em; margin-top: 1rem; }
+
+.screen-form { max-width: 30rem; }
+body[data-view="screen"] .screen-form input { color: var(--ink); }
+body[data-view="screen"] .screen-form .btn { background: var(--brand-ink); color: var(--brand); border-color: var(--brand-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill { transition: none; }
 }
