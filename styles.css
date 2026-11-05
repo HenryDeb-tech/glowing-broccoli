@@ -1,0 +1,50 @@
+:root {
+  --ink: #1a1a2e;
+  --paper: #fafaf7;
+  --accent: #5b4bdb;
+  --muted: #5f6270;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 15vh 1.5rem 3rem;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.1;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+footer {
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--muted);
+}
